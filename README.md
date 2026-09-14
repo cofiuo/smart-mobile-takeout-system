@@ -2,6 +2,16 @@
 
 实训大作业项目。面向手机端的智能外卖点餐 H5 应用，页面按手机宽度设计，包含商家与商品浏览、购物车、下单支付、订单管理、评论与收藏、收货地址，并接入大模型实现 AI 客服问答。
 
+## 界面预览
+
+| 登录 | 首页 | 分类 | 商家点餐 |
+| :---: | :---: | :---: | :---: |
+| ![登录](docs/screenshots/01-login.jpg) | ![首页](docs/screenshots/02-home.jpg) | ![分类](docs/screenshots/03-categories.jpg) | ![商家点餐](docs/screenshots/04-business.jpg) |
+| **购物车** | **订单** | **我的** | **AI 客服** |
+| ![购物车](docs/screenshots/05-cart.jpg) | ![订单](docs/screenshots/06-orders.jpg) | ![我的](docs/screenshots/07-profile.jpg) | ![AI 客服](docs/screenshots/08-ai-chat.jpg) |
+
+> 以上截图均为项目实际运行画面，数据来自本地数据库。
+
 ## 技术栈
 
 **前端（移动端 H5）**
@@ -27,6 +37,7 @@
 ├── 后端项目/
 │   ├── go2-serve/            业务后端（端口 10001）
 │   └── go-chat-ai/           AI 问答后端（端口 10002）
+├── docs/screenshots/         界面截图
 └── system.sql                数据库结构与数据
 ```
 
@@ -54,6 +65,8 @@ cp 后端项目/go-chat-ai/src/main/resources/application.example.yaml 后端项
 cd 后端项目/go2-serve && ./mvnw spring-boot:run    # 业务接口，端口 10001
 cd 后端项目/go-chat-ai && ./mvnw spring-boot:run   # AI 问答，端口 10002
 ```
+
+> `go2-serve` 使用 Spring Boot 2.3.7，需要 JDK 8 或 11；`go-chat-ai` 需要 JDK 17 及以上。
 
 ### 4. 启动前端
 

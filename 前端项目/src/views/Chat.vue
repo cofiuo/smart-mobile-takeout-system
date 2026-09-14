@@ -25,7 +25,8 @@
               <div v-for="(msg, index) in messageList" :key="index"
                 :class="['message', msg.type === 'user' ? 'user-message' : 'system-message']">
                 <div class="avatar">{{ msg.type === 'user' ? '👤' : '🤖' }}</div>
-                <div class="content">{{ msg.content }}</div>
+                <div class="content" v-if="msg.type === 'user'">{{ msg.content }}</div>
+                <div class="content markdown" v-else v-html="renderMarkdown(msg.content)"></div>
               </div>
             </div>
 
@@ -48,6 +49,7 @@ import { ref, reactive, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import axios from "axios"
 import Footer from "@/components/Footer.vue"
+import { marked } from 'marked'
 
 // 输入框内容
 const inputMessage = ref('')
@@ -55,6 +57,13 @@ const inputMessage = ref('')
 const messageList = reactive([])
 // 聊天窗口DOM
 const chatMessages = ref(null)
+
+// 后端返回的是 markdown（订单查询结果为表格），这里解析渲染
+// 先转义尖括号，避免模型输出被当作 HTML 执行
+const renderMarkdown = (text) => {
+  const safe = String(text == null ? '' : text).replace(/[<>]/g, (c) => (c === '<' ? '&lt;' : '&gt;'))
+  return marked.parse(safe)
+}
 
 // 发送消息
 const sendMessage = async () => {
@@ -228,5 +237,28 @@ onMounted(() => {
 
 .chat-input .el-button {
   height: 10vw;
+}
+
+/* markdown 渲染结果（订单查询表格）的样式 */
+.content :deep(p) {
+  margin: 4px 0;
+}
+.content :deep(table) {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 8px 0;
+  font-size: 2.8vw;
+}
+.content :deep(th),
+.content :deep(td) {
+  border: 1px solid #dcdfe6;
+  padding: 3px 2px;
+  text-align: center;
+  overflow-wrap: break-word;
+  line-height: 1.35;
+}
+.content :deep(th) {
+  background-color: #e8e8e8;
+  font-weight: 600;
 }
 </style>

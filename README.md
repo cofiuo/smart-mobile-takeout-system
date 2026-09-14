@@ -2,15 +2,21 @@
 
 实训大作业项目。面向手机端的智能外卖点餐 H5 应用，页面按手机宽度设计，包含商家与商品浏览、购物车、下单支付、订单管理、评论与收藏、收货地址，并接入大模型实现 AI 客服问答。
 
-## 界面预览
+## 演示
 
-| 登录 | 首页 | 分类 | 商家点餐 |
+![操作流程演示](docs/demo.gif)
+
+### 界面截图
+
+| 登录 | 首页 | 分类浏览 | 商家点餐 |
 | :---: | :---: | :---: | :---: |
-| ![登录](docs/screenshots/01-login.jpg) | ![首页](docs/screenshots/02-home.jpg) | ![分类](docs/screenshots/03-categories.jpg) | ![商家点餐](docs/screenshots/04-business.jpg) |
-| **购物车** | **订单** | **我的** | **AI 客服** |
-| ![购物车](docs/screenshots/05-cart.jpg) | ![订单](docs/screenshots/06-orders.jpg) | ![我的](docs/screenshots/07-profile.jpg) | ![AI 客服](docs/screenshots/08-ai-chat.jpg) |
+| ![登录](docs/screenshots/01-login.jpg) | ![首页](docs/screenshots/02-home.jpg) | ![分类浏览](docs/screenshots/03-categories.jpg) | ![商家点餐](docs/screenshots/04-business.jpg) |
+| **购物车** | **确认订单** | **在线支付** | **我的订单** |
+| ![购物车](docs/screenshots/05-cart.jpg) | ![确认订单](docs/screenshots/06-order-confirm.jpg) | ![在线支付](docs/screenshots/07-payment.jpg) | ![我的订单](docs/screenshots/08-orders.jpg) |
+| **我的评论** | **地址管理** | **个人中心** | **AI 客服** |
+| ![我的评论](docs/screenshots/09-comments.jpg) | ![地址管理](docs/screenshots/10-address.jpg) | ![个人中心](docs/screenshots/11-profile.jpg) | ![AI 客服](docs/screenshots/12-ai-chat.jpg) |
 
-> 以上截图均为项目实际运行画面，数据来自本地数据库。
+> 以上截图与动图均为项目实际运行画面，数据取自本地数据库。AI 客服不是普通对话机器人，它通过 Spring AI 的 Function Calling 调用 `queryOrders` 工具，真实查询数据库并返回订单明细。
 
 ## 技术栈
 
@@ -19,6 +25,7 @@
 - Vue 3 + Vue Router 4
 - Element Plus
 - Axios + qs
+- marked（渲染 AI 返回的 Markdown 表格）
 - Vue CLI 5 构建
 
 **后端（两个独立服务，需要同时启动）**
@@ -37,7 +44,7 @@
 ├── 后端项目/
 │   ├── go2-serve/            业务后端（端口 10001）
 │   └── go-chat-ai/           AI 问答后端（端口 10002）
-├── docs/screenshots/         界面截图
+├── docs/                     演示动图与界面截图
 └── system.sql                数据库结构与数据
 ```
 

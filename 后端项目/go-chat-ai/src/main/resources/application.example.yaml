@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: go-chat-ai
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/system?useUnicode=true&allowPublicKeyRetrieval=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: 请填写你的数据库密码
+  ai:
+    openai:
+      api-key: 请填写你自己的大模型 API Key
+      base-url: https://dashscope.aliyuncs.com/compatible-mode
+      chat:
+        options:
+          model: qwen-max
+server:
+  port: 10002
+  servlet:
+    context-path: /
